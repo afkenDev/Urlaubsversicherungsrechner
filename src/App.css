@@ -52,7 +52,6 @@ body {
 
 /* Header Styles */
 .header {
-  background-color: #333; /* dunkelgraue Hintergrundfarbe */
   color: #fff; /* weiße Schriftfarbe */
   padding: 1em;
   text-align: center;
@@ -111,14 +110,15 @@ body {
 }
 
 .weiter {
-  background-color: #007bff; /* blaue Hintergrundfarbe */
+  background-color: #3cac00; /* blaue Hintergrundfarbe */
   color: #fff; /* weiße Schriftfarbe */
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 25px;
 }
 
 .weiter:hover {
-  background-color: #0069d9; /* dunklere blaue Hintergrundfarbe beim Hover */
+  background-color: #256301; /* dunklere blaue Hintergrundfarbe beim Hover */
 }
