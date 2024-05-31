@@ -1,0 +1,42 @@
+.plane-container {
+  position: fixed; /* fixed position to cover the entire viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* ensure it's on top of other elements */
+}
+
+.plane-container img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.slide-in {
+  animation: slideIn 1s forwards;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(150%);
+  }
+  100% {
+    transform: translateY(5%);
+  }
+}
+
+.slide-out {
+  animation: slideOut 1s forwards;
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateY(5%);
+  }
+  100% {
+    transform: translateY(-150%);
+  }
+}

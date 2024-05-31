@@ -88,7 +88,6 @@ body {
   color: #fff; /* weiße Schriftfarbe */
 }
 
-
 /* Label and Select Styles */
 .label {
   display: block;
@@ -110,15 +109,34 @@ body {
 }
 
 .weiter {
-  background-color: #3cac00; /* blaue Hintergrundfarbe */
+  background-color: #3cac00; /* grüne Hintergrundfarbe */
   color: #fff; /* weiße Schriftfarbe */
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 25px;
+  transition: font-weight 0.4s ease, transform 0.2s ease; /* Transition für sanften Übergang */
 }
 
 .weiter:hover {
-  background-color: #256301; /* dunklere blaue Hintergrundfarbe beim Hover */
+  background-color: #256301; /* dunklere grüne Hintergrundfarbe beim Hover */
+  font-weight: bold; /* Text wird fett beim Hover */
+  transform: scale(1.05); /* Button wird etwas größer beim Hover */
+}
+
+/* Plane Image Styles */
+.plane-container {
+  position: relative;
+  width: 100%;
+  height: 300px; /* adjust as needed */
+  margin-top: 20px;
+}
+
+.plane-container img {
+  position: absolute;
+  top: -100px; /* adjust as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
 }
