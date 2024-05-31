@@ -140,3 +140,37 @@ body {
   transform: translateX(-50%);
   z-index: -1;
 }
+
+.form-container {
+  max-width: 20%;
+  margin: auto;
+  padding: 20px;
+}
+.form-group {
+  margin-bottom: 0.5rem;
+}
+.form-group label {
+  display: block;
+  font-weight: bold;
+}
+.form-group input[type="number"] {
+  padding: 10px;
+  border: 1px solid #ccc; /* hellgraue Randfarbe */
+  border-radius: 5px; /* fixed border radius */
+  width: calc(100% - 26%);
+  display: inline-block;
+  vertical-align: middle;
+}
+.form-group .btn {
+  padding: 8px 12px;
+  margin-left: 0.1rem;
+  background-color: #3cac00; /* grüne Hintergrundfarbe */
+  color: #fff; /* weiße Schriftfarbe */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.form-group .btn:hover {
+  background-color: #256301; /* dunklere grüne Hintergrundfarbe beim Hover */
+}
