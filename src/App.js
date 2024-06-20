@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import "./App.css";
 import PlaneImage from "./components/plane.js";
-import Button from "./components/Button";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import Schritt2 from "./components/schritt2.js";
+import Button from './components/Button'; // Annahme: Button-Komponente importieren
+
 
 function App() {
   const [showStartPage, setShowStartPage] = useState(true);
@@ -22,6 +25,7 @@ function App() {
       }, 1888);
     }
   };
+  
 
   const handleAnimationEnd = () => {};
 
@@ -63,8 +67,17 @@ function App() {
   };
 
   const onClickWeiter1 = () => {
-    console.log("onClick");
+    const data = {
+      adults: adultCount,
+      kids: kidCount,
+      pets: petCount,
+    };
+    window.myGlobalData = data; // mach die data global für andere scripts zu sehen
+    console.log("window.myGlobalData:", window.myGlobalData);
+    window.location.href = '/schritt2';
+
   };
+  const myGlobalData = window.myGlobalData;
 
   return (
     <div className="App">
@@ -132,11 +145,21 @@ function App() {
                 }
               )}
             </div>
-            <Button onClick={onClickWeiter1}>Weiter ⭢</Button>
+            <Router>
+              <Route exact path="/">
+                {myGlobalData ? (
+                  <div>Zu Schritt 2 weiterleiten...</div>
+                ) : (
+                  <Button onClick={onClickWeiter1}>Weiter ⭢</Button>
+                )}
+              </Route>
+              <Route path="/schritt2">
+                <Schritt2 myData={myGlobalData} />
+              </Route>
+            </Router>
           </>
         )}
       </div>
-
       {animatePlane && <PlaneImage onAnimationEnd={handleAnimationEnd} />}
     </div>
   );

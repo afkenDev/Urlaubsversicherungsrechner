@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import './App.css';
-import PlaneImage from './components/plane.js';
-import Button from './components/Button';
+import React, { useState } from "react";
+import "./App.css";
+import PlaneImage from "./components/plane.js";
+import Button from "./components/Button";
+import { BrowserRouter,Route,Switch } from 'react-router-dom';     
+
 
 function App() {
   const [showStartPage, setShowStartPage] = useState(true);
@@ -10,7 +12,7 @@ function App() {
   const [adultCount, setAdultCount] = useState(0);
   const [kidCount, setKidCount] = useState(0);
   const [petCount, setPetCount] = useState(0);
-  const [errorMessage, setErrorMessage] = useState(''); // Neue Variable für Fehlermeldung
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleButtonClick = () => {
     if (showStartPage) {
@@ -29,21 +31,19 @@ function App() {
     let inputValue = parseInt(document.getElementById(inputId).value);
     let newValue;
 
-    if (inputId === 'erwachsene') {
+    if (inputId === "erwachsene") {
       newValue = inputValue + 1;
       setAdultCount(newValue);
-    } else if (inputId === 'kinder') {
+    } else if (inputId === "kinder") {
       newValue = inputValue + 1;
       setKidCount(newValue);
-    } else if (inputId === 'haustiere') {
+    } else if (inputId === "haustiere") {
       newValue = inputValue + 1;
       setPetCount(newValue);
     }
 
-    // Grenze setzen 
     if (newValue > 10) {
       newValue = 10; // Maximalzahl auf 10 setzen
-    } else {
     }
 
     document.getElementById(inputId).value = newValue;
@@ -53,11 +53,11 @@ function App() {
     let inputValue = parseInt(document.getElementById(inputId).value);
     let newValue = Math.max(inputValue - 1, 0);
 
-    if (inputId === 'erwachsene') {
+    if (inputId === "erwachsene") {
       setAdultCount(newValue);
-    } else if (inputId === 'kinder') {
+    } else if (inputId === "kinder") {
       setKidCount(newValue);
-    } else if (inputId === 'haustiere') {
+    } else if (inputId === "haustiere") {
       setPetCount(newValue);
     }
 
@@ -65,57 +65,87 @@ function App() {
   };
 
   const onClickWeiter1 = () => {
-    console.log("onClick");
-  }
+    const data = {
+      adults: adultCount,
+      kids: kidCount,
+      pets: petCount
+    }; 
+    window.myGlobalData = data; // mach die data global für andere scripts zu sehen
+    console.log("window.myGlobalData:", window.myGlobalData);
+    
+  };
+
 
   return (
     <div className="App">
-      {showStartPage && (
-        <div className="App-header">
-          <h1>Urlaubsversicherungsrechner</h1>
-          <div className="frage">Wollen Sie sich im Ausland sicher fühlen?</div>
-          <div>
-            <Button onClick={handleButtonClick}>Start ⭢</Button>
-          </div>
-        </div>
-      )}
+      <div className="App-header">
+        {showStartPage && (
+          <>
+            <h1>Urlaubsversicherungsrechner</h1>
+            <div className="frage">
+              Wollen Sie sich im Ausland sicher fühlen?
+            </div>
+            <div>
+              <Button onClick={handleButtonClick}>Start ⭢</Button>
+            </div>
+          </>
+        )}
 
-      {showQuestionPage && (
-        <div className="App-header">
-          <div className="anzeige">
-            <span className="schritt" style={{ fontWeight: 'bold', textDecoration: 'underline'}}>■ Schritt 1</span>
-            <span className="schritt">□ Schritt 2</span>
-            <span className="schritt">□ Schritt 3</span>
-            <span className="schritt">□ Schritt 4</span>
-            <span className="schritt">□ Schritt 5</span>
-          </div>
-          <h1>Wie viele Personen wollen Sie mitversichern?</h1>
-          <div className="frage">
-            🛈 Bitte beachten Sie bitte, dass Sie nur Leute von Ihrem Haushalt hinzufügen dürfen. Haustiere sind u. a. Katzen und Hunde.
-          </div>
-          <div className="form-container">
-            {['Erwachsene (17+)', 'Kinder (17-)', 'Haustiere'].map((label, index) => {
-              const id = label.split(' ')[0].toLowerCase();
-              const countVar =
-                id === 'erwachsene'
-                  ? adultCount
-                  : id === 'kinder'
-                  ? kidCount
-                  : petCount;
-              return (
-                <div className="form-group" key={index}>
-                  <label htmlFor={id}>{label}</label>
-                  <input type="number" id={id} min="0" defaultValue="0" disabled/>
-                  <button className="btn" onClick={() => increment(id)}>+</button>
-                  <button className="btn" onClick={() => decrement(id)}>-</button>
-                </div>
-              );
-            })}
-          </div>
-          <Button onClick={onClickWeiter1}>Weiter ⭢</Button>
-        </div>
-      )}
+        {showQuestionPage && (
+          <>
+            <div className="anzeige">
+              <span
+                className="schritt"
+                style={{ fontWeight: "bold", textDecoration: "underline" }}
+              >
+                ■ Schritt 1
+              </span>
+              <span className="schritt">□ Schritt 2</span>
+              <span className="schritt">□ Schritt 3</span>
+              <span className="schritt">□ Schritt 4</span>
+              <span className="schritt">□ Schritt 5</span>
+            </div>
+            <h1 id="heading"> Wie viele Personen wollen Sie mitversichern?</h1>
 
+            <div className="frage">
+              🛈 Bitte beachten Sie bitte, dass Sie nur Leute von Ihrem Haushalt
+              hinzufügen dürfen. Haustiere sind u. a. Katzen und Hunde.
+            </div>
+            <div className="form-container">
+              {["Erwachsene (17+)", "Kinder (17-)", "Haustiere"].map(
+                (label, index) => {
+                  const id = label.split(" ")[0].toLowerCase();
+                  const countVar =
+                    id === "erwachsene"
+                      ? adultCount
+                      : id === "kinder"
+                      ? kidCount
+                      : petCount;
+                  return (
+                    <div className="form-group" key={index}>
+                      <label htmlFor={id}>{label}</label>
+                      <input
+                        type="number"
+                        id={id}
+                        min="0"
+                        defaultValue="0"
+                        disabled
+                      />
+                      <button className="btn" onClick={() => increment(id)}>
+                        +
+                      </button>
+                      <button className="btn" onClick={() => decrement(id)}>
+                        -
+                      </button>
+                    </div>
+                  );
+                }
+              )}
+            </div>
+            <Button onClick={onClickWeiter1}>Weiter ⭢</Button>
+          </>
+        )}
+      </div>
       {animatePlane && <PlaneImage onAnimationEnd={handleAnimationEnd} />}
     </div>
   );
