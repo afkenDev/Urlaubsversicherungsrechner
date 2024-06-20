@@ -1,9 +1,14 @@
 import React, { useState } from "react";
-import "./App.css";
-import PlaneImage from "./components/plane.js";
-import Button from "./components/Button";
-import { BrowserRouter,Route,Switch } from 'react-router-dom';     
-
+import "../App.css";
+import PlaneImage from "../components/plane.js";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import Schritt2 from "../components/schritt2.js";
+import Button from "../components/Button"; // Annahme: Button-Komponente importieren
 
 function App() {
   const [showStartPage, setShowStartPage] = useState(true);
@@ -68,13 +73,13 @@ function App() {
     const data = {
       adults: adultCount,
       kids: kidCount,
-      pets: petCount
-    }; 
+      pets: petCount,
+    };
     window.myGlobalData = data; // mach die data global für andere scripts zu sehen
     console.log("window.myGlobalData:", window.myGlobalData);
-    
+    window.location.href = "/schritt2";
   };
-
+  const myGlobalData = window.myGlobalData;
 
   return (
     <div className="App">

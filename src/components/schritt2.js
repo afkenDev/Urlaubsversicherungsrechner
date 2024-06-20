@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Button from "./components/Button";
+import Button from "../components/Button";
+import "../App.css";
 
 function Schritt2({ myData }) {
   const [selectedDate, setSelectedDate] = useState(null);

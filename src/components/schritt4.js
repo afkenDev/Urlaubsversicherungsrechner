@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import Button from "./components/Button";
+import Button from "../components/Button";
+import "../App.css";
+
 import ReactDropdown from "react-dropdown";
 import "react-dropdown/style.css"; 
 
