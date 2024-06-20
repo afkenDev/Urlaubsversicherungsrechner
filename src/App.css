@@ -73,6 +73,13 @@ body {
   margin: 20px;
 }
 
+@media (max-width: 768px) {
+  .steps {
+    grid-template-columns: 1fr; /* Einspaltig bei kleineren Bildschirmen */
+    gap: 10px;
+  }
+}
+
 .step {
   background-color: #fff; /* weiße Hintergrundfarbe */
   border: 1px solid #ddd; /* hellgraue Randfarbe */
@@ -110,6 +117,12 @@ body {
   max-width: 50%;
 }
 
+@media (max-width: 768px) {
+  .frage {
+    max-width: 90%;
+  }
+}
+
 .weiter {
   background-color: #3cac00; /* grüne Hintergrundfarbe */
   color: #fff; /* weiße Schriftfarbe */
@@ -119,7 +132,7 @@ body {
   cursor: pointer;
   font-size: 25px;
   transition: font-weight 0.4s ease, transform 0.2s ease; /* Transition für sanften Übergang */
-  margin-bottom: 14%;
+  margin-bottom: 13%;
 }
 
 .weiter:hover {
@@ -131,9 +144,10 @@ body {
 /* Plane Image Styles */
 .plane-container {
   position: relative;
-  width: 110%;
+  width: 100%;
   height: 300px; /* adjust as needed */
   margin-top: 20px;
+  overflow: hidden;
 }
 
 .plane-container img {
@@ -142,20 +156,48 @@ body {
   left: 50%;
   transform: translateX(-50%);
   z-index: -1;
+  width: 100%;
+  height: auto;
 }
 
 .form-container {
   max-width: 20%;
+  top: -100px;
   margin: auto;
   padding: 20px;
 }
+
+.form-container label {
+  font-size: smaller;
+}
+
+@media (max-width: 768px) {
+  .form-container {
+    max-width: 90%;
+  }
+}
+
+.datumsauswahl {
+  margin-bottom: 0.5rem;
+}
+
+.custom-datepicker {
+  padding: 10px;
+  border: 1px solid #ccc; /* hellgraue Randfarbe */
+  border-radius: 5px;
+  width: calc(105% - 20px); /* passt den DatePicker an die Containergröße an */
+  max-width: 400px;
+}
+
 .form-group {
   margin-bottom: 0.5rem;
 }
+
 .form-group label {
   display: block;
   font-weight: bold;
 }
+
 .form-group input[type="number"] {
   padding: 10px;
   border: 1px solid #ccc; /* hellgraue Randfarbe */
@@ -164,6 +206,7 @@ body {
   display: inline-block;
   vertical-align: middle;
 }
+
 .form-group .btn {
   padding: 8px 12px;
   margin-left: 0.1rem;
@@ -174,21 +217,37 @@ body {
   cursor: pointer;
   transition: background-color 0.3s;
 }
+
 .form-group .btn:hover {
   background-color: #256301; /* dunklere grüne Hintergrundfarbe beim Hover */
 }
 
 .anzeige {
+  position: fixed; 
+  top: 0; 
+  width: 100%; 
+  margin-top: 0; 
+  margin-bottom: 0; 
+  display: flex;
+  align-items: center;
+  justify-content: center; 
   margin-top: 5%;
   margin-bottom: 2.5%;
   display: flex;
   align-items: center;
+  padding: 10px 0; 
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
 }
+
+@media (max-width: 768px) {
+  .anzeige {
+    flex-direction: column;
+  }
+}
+
 .schritt {
   margin: 0 5px;
 }
-
-
 
 input[disabled], textarea[disabled], select[disabled] { /* damit das form nicht mehr bearbeitbar ist bei disabled aber trotzdem schön bleibt */
   background-color: white; /* Hintergrundfarbe auf Weiß setzen */
@@ -196,3 +255,21 @@ input[disabled], textarea[disabled], select[disabled] { /* damit das form nicht 
   opacity: 1; /* Standard-Deckkraft */
   cursor: not-allowed; /* Zeiger auf 'nicht erlaubt' setzen */
 }
+
+#heading {
+  font-size: 3rem; 
+  margin-top: 10%;
+}
+
+@media (max-width: 768px) {
+  #heading {
+    font-size: 2.5rem; 
+    margin-top: 8%; 
+  }
+}
+
+@media (max-width: 480px) {
+  #heading {
+    font-size: 2rem; 
+    margin-top: 6%; 
+}}

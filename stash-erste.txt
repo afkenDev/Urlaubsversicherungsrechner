@@ -40,7 +40,7 @@ function App() {
       setPetCount(newValue);
     }
 
-    // Grenze setzten 
+    // Grenze setzen 
     if (newValue > 10) {
       newValue = 10; // Maximalzahl auf 10 setzen
     } else {
@@ -65,8 +65,8 @@ function App() {
   };
 
   const onClickWeiter1 = () => {
-  console.log("onClick");
-}
+    console.log("onClick");
+  }
 
   return (
     <div className="App">
@@ -112,16 +112,12 @@ function App() {
               );
             })}
           </div>
-          <Button onClickWeiter1={}>Weiter ⭢</Button>
+          <Button onClick={onClickWeiter1}>Weiter ⭢</Button>
         </div>
-        
       )}
-        
-
 
       {animatePlane && <PlaneImage onAnimationEnd={handleAnimationEnd} />}
     </div>
-  
   );
 }
 

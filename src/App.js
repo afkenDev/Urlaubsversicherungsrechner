@@ -1,47 +1,143 @@
-import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import Button from './Button';
+import React, { useState } from "react";
+import "./App.css";
+import PlaneImage from "./components/plane.js";
+import Button from "./components/Button";
 
 function App() {
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [maxDate, setMaxDate] = useState(new Date(new Date().getTime() + 90 * 24 * 60 * 60 * 1000)); // 3 Monate in Millisekunden
+  const [showStartPage, setShowStartPage] = useState(true);
+  const [showQuestionPage, setShowQuestionPage] = useState(false);
+  const [animatePlane, setAnimatePlane] = useState(false);
+  const [adultCount, setAdultCount] = useState(0);
+  const [kidCount, setKidCount] = useState(0);
+  const [petCount, setPetCount] = useState(0);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
+  const handleButtonClick = () => {
+    if (showStartPage) {
+      setAnimatePlane(true);
+
+      setTimeout(() => {
+        setShowStartPage(false);
+        setShowQuestionPage(true);
+      }, 1888);
+    }
   };
 
-  const validateDate = (date) => {
-    return date <= maxDate;
+  const handleAnimationEnd = () => {};
+
+  const increment = (inputId) => {
+    let inputValue = parseInt(document.getElementById(inputId).value);
+    let newValue;
+
+    if (inputId === "erwachsene") {
+      newValue = inputValue + 1;
+      setAdultCount(newValue);
+    } else if (inputId === "kinder") {
+      newValue = inputValue + 1;
+      setKidCount(newValue);
+    } else if (inputId === "haustiere") {
+      newValue = inputValue + 1;
+      setPetCount(newValue);
+    }
+
+    if (newValue > 10) {
+      newValue = 10; // Maximalzahl auf 10 setzen
+    }
+
+    document.getElementById(inputId).value = newValue;
   };
 
-  const onClickWeiter2 = () => {
-    // was passiert
-  }
+  const decrement = (inputId) => {
+    let inputValue = parseInt(document.getElementById(inputId).value);
+    let newValue = Math.max(inputValue - 1, 0);
+
+    if (inputId === "erwachsene") {
+      setAdultCount(newValue);
+    } else if (inputId === "kinder") {
+      setKidCount(newValue);
+    } else if (inputId === "haustiere") {
+      setPetCount(newValue);
+    }
+
+    document.getElementById(inputId).value = newValue;
+  };
+
+  const onClickWeiter1 = () => {
+    console.log("onClick");
+  };
 
   return (
     <div className="App">
       <div className="App-header">
-        <div className="anzeige">
-          <span className="schritt">□ Schritt 1</span>
-          <span className="schritt" style={{ fontWeight: 'bold', textDecoration: 'underline'}}>■ Schritt 2</span>
-          <span className="schritt">□ Schritt 3</span>
-          <span className="schritt">□ Schritt 4</span>
-          <span className="schritt">□ Schritt 5</span>
-        </div>
-        <h1>Wie lange reisen sie?</h1>
-        <div className="frage">
-           Wählen Sie den Tag der Ankunft bis zum Tag der Abreise mit. Sie können maximal 3 Monate Reisedauer versichern werden, längere Reisen können nicht versichert werden. 
-        </div>
+        {showStartPage && (
+          <>
+            <h1>Urlaubsversicherungsrechner</h1>
+            <div className="frage">
+              Wollen Sie sich im Ausland sicher fühlen?
+            </div>
+            <div>
+              <Button onClick={handleButtonClick}>Start ⭢</Button>
+            </div>
+          </>
+        )}
+
+        {showQuestionPage && (
+          <>
+            <div className="anzeige">
+              <span
+                className="schritt"
+                style={{ fontWeight: "bold", textDecoration: "underline" }}
+              >
+                ■ Schritt 1
+              </span>
+              <span className="schritt">□ Schritt 2</span>
+              <span className="schritt">□ Schritt 3</span>
+              <span className="schritt">□ Schritt 4</span>
+              <span className="schritt">□ Schritt 5</span>
+            </div>
+            <h1 id="heading"> Wie viele Personen wollen Sie mitversichern?</h1>
+
+            <div className="frage">
+              🛈 Bitte beachten Sie bitte, dass Sie nur Leute von Ihrem Haushalt
+              hinzufügen dürfen. Haustiere sind u. a. Katzen und Hunde.
+            </div>
+            <div className="form-container">
+              {["Erwachsene (17+)", "Kinder (17-)", "Haustiere"].map(
+                (label, index) => {
+                  const id = label.split(" ")[0].toLowerCase();
+                  const countVar =
+                    id === "erwachsene"
+                      ? adultCount
+                      : id === "kinder"
+                      ? kidCount
+                      : petCount;
+                  return (
+                    <div className="form-group" key={index}>
+                      <label htmlFor={id}>{label}</label>
+                      <input
+                        type="number"
+                        id={id}
+                        min="0"
+                        defaultValue="0"
+                        disabled
+                      />
+                      <button className="btn" onClick={() => increment(id)}>
+                        +
+                      </button>
+                      <button className="btn" onClick={() => decrement(id)}>
+                        -
+                      </button>
+                    </div>
+                  );
+                }
+              )}
+            </div>
+            <Button onClick={onClickWeiter1}>Weiter ⭢</Button>
+          </>
+        )}
       </div>
-      <div className="datumsauswahl">
-        <DatePicker
-          selected={selectedDate}
-          onChange={handleDateChange}
-          maxDate={maxDate}
-          dateFormat="dd.MM.yyyy"
-        />
-      </div>
-      <Button onClick={onClickWeiter2} disabled={!validateDate(selectedDate)}>Weiter ⭢</Button>
+
+      {animatePlane && <PlaneImage onAnimationEnd={handleAnimationEnd} />}
     </div>
   );
 }
