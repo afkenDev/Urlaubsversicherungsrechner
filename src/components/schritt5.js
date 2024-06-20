@@ -3,19 +3,24 @@ import Button from "../components/Button";
 import "../App.css";
 import ReactDropdown from "react-dropdown";
 import "react-dropdown/style.css"; 
+import { useNavigate } from 'react-router-dom';
 
-
-function App() {
-  const [travelExperience, setTravelExperience] = useState(""); // 
+function Step5({ globalData, setGlobalData }) {
+  const [travelExperience, setTravelExperience] = useState(globalData.travelExperience);
+  const navigate = useNavigate();
 
   const handleOptionChange = (option) => {
-    setTravelExperience(option.value); //
+    setTravelExperience(option.value);
   };
 
-  const onClickWeiter2 = () => {
-    console.log("Selected travel experience:", travelExperience); 
-    // Perform other actions based on the selected travel experience
+  const onClickWeiter5 = () => {
+    setGlobalData((prevData) => ({
+      ...prevData,
+      travelExperience: travelExperience,
+    }));
+    navigate('/ergebniss');
   };
+  
 
   const travelExperiences = [
     { value: "Keine Erfahrung", label: "Keine Erfahrung" },
@@ -35,7 +40,6 @@ function App() {
           <span className="schritt" style={{ fontWeight: "bold", textDecoration: "underline" }}>
             ■ Schritt 5
           </span>
-
         </div>
         <h1 id="heading">Wie viel Reiseerfahrung haben Sie?</h1>
         <div className="frage">
@@ -53,7 +57,7 @@ function App() {
             />
           </div>
         </div>
-        <Button onClick={onClickWeiter2} disabled={!travelExperience}>
+        <Button onClick={onClickWeiter5} disabled={!travelExperience}>
           Weiter ⭢
         </Button>
       </div>
@@ -61,4 +65,4 @@ function App() {
   );
 }
 
-export default App;
+export default Step5;

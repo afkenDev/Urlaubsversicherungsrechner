@@ -3,23 +3,31 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Button from "../components/Button";
 import "../App.css";
+import { useNavigate } from 'react-router-dom';
 
-function Schritt2({ myData }) {
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [maxDate, setMaxDate] = useState(
-    new Date(new Date().getTime() + 90 * 24 * 60 * 60 * 1000)
-  ); // 3 Monate in Millisekunden
-  const data = myData;
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
+function Schritt2({ globalData, setGlobalData }) {
+  const [startDate, setStartDate] = useState(globalData.startDate);
+  const [endDate, setEndDate] = useState(globalData.endDate);
+  const maxDate = new Date(new Date().getTime() + 90 * 24 * 60 * 60 * 1000); // 3 Monate in Millisekunden
+  const navigate = useNavigate();
+
+  const handleDateChange = (dates) => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
   };
 
-  const validateDate = (date) => {
-    return date <= maxDate;
+  const validateDates = (start, end) => {
+    return start && end && end <= maxDate && (end - start) <= 90 * 24 * 60 * 60 * 1000;
   };
 
   const onClickWeiter2 = () => {
-    // was passiert
+    setGlobalData((prevData) => ({
+      ...prevData,
+      startDate: startDate,
+      endDate: endDate,
+    }));
+    navigate('/schritt3');
   };
 
   return (
@@ -29,30 +37,34 @@ function Schritt2({ myData }) {
           <span className="schritt">□ Schritt 1</span>
           <span
             className="schritt"
-            style={{ fontWeight: "bold", textDecoration: "underline" }}>
+            style={{ fontWeight: "bold", textDecoration: "underline" }}
+          >
             ■ Schritt 2
           </span>
           <span className="schritt">□ Schritt 3</span>
           <span className="schritt">□ Schritt 4</span>
           <span className="schritt">□ Schritt 5</span>
         </div>
-        <h1>Wie lange reisen sie?</h1>
+        <h1>Wie lange reisen Sie?</h1>
         <div className="frage">
-          Wählen Sie den Tag der Ankunft bis zum Tag der Abreise mit. Sie können
-          maximal 3 Monate Reisedauer versichern werden, längere Reisen können
-          nicht versichert werden.
+          Wählen Sie den Tag der Ankunft bis zum Tag der Abreise. Sie können
+          maximal 3 Monate Reisedauer versichern, längere Reisen können nicht
+          versichert werden.
         </div>
         <div className="datumsauswahl">
           <DatePicker
-            selected={selectedDate}
+            selected={startDate}
             onChange={handleDateChange}
+            startDate={startDate}
+            endDate={endDate}
+            selectsRange
             maxDate={maxDate}
             dateFormat="dd.MM.yyyy"
-            placeholderText="Bitte wählen sie ein Datum"
+            placeholderText="Bitte wählen Sie einen Zeitraum"
             className="custom-datepicker"
           />
         </div>
-        <Button onClick={onClickWeiter2} disabled={!validateDate(selectedDate)}>
+        <Button onClick={onClickWeiter2} disabled={!validateDates(startDate, endDate)}>
           Weiter ⭢
         </Button>
       </div>

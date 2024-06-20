@@ -1,35 +1,24 @@
 import React, { useState } from "react";
 import Button from "../components/Button";
 import "../App.css";
-
 import ReactDropdown from "react-dropdown";
 import "react-dropdown/style.css"; 
+import { useNavigate } from 'react-router-dom';
 
-
-
-function App() {
-  const [insuranceOptions, setInsuranceOptions] = useState({
-    cancellationProtection: false,
-    medicalEmergencyProtection: false,
-    luggageProtection: false,
-  });
-
-  const [tripType, setTripType] = useState("");
-
-  const handleOptionChange = (event) => {
-    const { name, checked } = event.target;
-    setInsuranceOptions({
-      ...insuranceOptions,
-      [name]: checked,
-    });
-  };
+function Step4({ globalData, setGlobalData }) {
+  const [tripType, setTripType] = useState(globalData.tripType);
+  const navigate = useNavigate();
 
   const handleTripTypeChange = (selectedOption) => {
     setTripType(selectedOption.value);
   };
 
-  const onClickWeiter2 = () => {
-    console.log("Selected trip type:", tripType);
+  const onClickWeiter4 = () => {
+    setGlobalData((prevData) => ({
+      ...prevData,
+      tripType: tripType,
+    }));
+    navigate('/schritt5');
   };
 
   const tripTypes = [
@@ -60,18 +49,17 @@ function App() {
             Versicherungsoptionen zu erhalten.
           </p>
           <div>
-          <label id="ka">Art der Reise:</label>
-          <ReactDropdown
-            options={tripTypes}
-            onChange={handleTripTypeChange}
-            value={tripType}
-            placeholder="Art der Reise hier auswählen"
-            menuClassName="dropdown-menu"
-          />
+            <label id="ka">Art der Reise:</label>
+            <ReactDropdown
+              options={tripTypes}
+              onChange={handleTripTypeChange}
+              value={tripType}
+              placeholder="Art der Reise hier auswählen"
+              menuClassName="dropdown-menu"
+            />
           </div>
-
         </div>
-        <Button onClick={onClickWeiter2} disabled={!Object.values(insuranceOptions).some(Boolean) || !tripType}>
+        <Button onClick={onClickWeiter4} disabled={!tripType}>
           Weiter ⭢
         </Button>
       </div>
@@ -79,4 +67,4 @@ function App() {
   );
 }
 
-export default App;
+export default Step4;

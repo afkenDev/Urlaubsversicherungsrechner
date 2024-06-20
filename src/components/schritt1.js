@@ -1,28 +1,21 @@
 import React, { useState } from "react";
 import "../App.css";
-import PlaneImage from "../components/plane.js";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
-import Schritt2 from "../components/schritt2.js";
-import Button from "../components/Button"; // Annahme: Button-Komponente importieren
+import PlaneImage from "../components/plane";
+import Button from "../components/Button";
+import { useNavigate } from 'react-router-dom';
 
-function App() {
+function Home({ setGlobalData }) {
   const [showStartPage, setShowStartPage] = useState(true);
   const [showQuestionPage, setShowQuestionPage] = useState(false);
   const [animatePlane, setAnimatePlane] = useState(false);
   const [adultCount, setAdultCount] = useState(0);
   const [kidCount, setKidCount] = useState(0);
   const [petCount, setPetCount] = useState(0);
-  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleButtonClick = () => {
     if (showStartPage) {
       setAnimatePlane(true);
-
       setTimeout(() => {
         setShowStartPage(false);
         setShowQuestionPage(true);
@@ -30,56 +23,23 @@ function App() {
     }
   };
 
-  const handleAnimationEnd = () => {};
-
-  const increment = (inputId) => {
-    let inputValue = parseInt(document.getElementById(inputId).value);
-    let newValue;
-
-    if (inputId === "erwachsene") {
-      newValue = inputValue + 1;
-      setAdultCount(newValue);
-    } else if (inputId === "kinder") {
-      newValue = inputValue + 1;
-      setKidCount(newValue);
-    } else if (inputId === "haustiere") {
-      newValue = inputValue + 1;
-      setPetCount(newValue);
-    }
-
-    if (newValue > 10) {
-      newValue = 10; // Maximalzahl auf 10 setzen
-    }
-
-    document.getElementById(inputId).value = newValue;
+  const increment = (setter, currentCount) => {
+    setter(currentCount < 10 ? currentCount + 1 : 10);
   };
 
-  const decrement = (inputId) => {
-    let inputValue = parseInt(document.getElementById(inputId).value);
-    let newValue = Math.max(inputValue - 1, 0);
-
-    if (inputId === "erwachsene") {
-      setAdultCount(newValue);
-    } else if (inputId === "kinder") {
-      setKidCount(newValue);
-    } else if (inputId === "haustiere") {
-      setPetCount(newValue);
-    }
-
-    document.getElementById(inputId).value = newValue;
+  const decrement = (setter, currentCount) => {
+    setter(currentCount > 0 ? currentCount - 1 : 0);
   };
 
   const onClickWeiter1 = () => {
-    const data = {
+    setGlobalData((prevData) => ({
+      ...prevData,
       adults: adultCount,
       kids: kidCount,
       pets: petCount,
-    };
-    window.myGlobalData = data; // mach die data global für andere scripts zu sehen
-    console.log("window.myGlobalData:", window.myGlobalData);
-    window.location.href = "/schritt2";
+    }));
+    navigate('/schritt2');
   };
-  const myGlobalData = window.myGlobalData;
 
   return (
     <div className="App">
@@ -110,50 +70,31 @@ function App() {
               <span className="schritt">□ Schritt 4</span>
               <span className="schritt">□ Schritt 5</span>
             </div>
-            <h1 id="heading"> Wie viele Personen wollen Sie mitversichern?</h1>
-
+            <h1 id="heading">Wie viele Personen wollen Sie mitversichern?</h1>
             <div className="frage">
-              🛈 Bitte beachten Sie bitte, dass Sie nur Leute von Ihrem Haushalt
-              hinzufügen dürfen. Haustiere sind u. a. Katzen und Hunde.
+              🛈 Bitte beachten Sie, dass Sie nur Leute aus Ihrem Haushalt hinzufügen dürfen. Haustiere sind u. a. Katzen und Hunde.
             </div>
             <div className="form-container">
-              {["Erwachsene (17+)", "Kinder (17-)", "Haustiere"].map(
-                (label, index) => {
-                  const id = label.split(" ")[0].toLowerCase();
-                  const countVar =
-                    id === "erwachsene"
-                      ? adultCount
-                      : id === "kinder"
-                      ? kidCount
-                      : petCount;
-                  return (
-                    <div className="form-group" key={index}>
-                      <label htmlFor={id}>{label}</label>
-                      <input
-                        type="number"
-                        id={id}
-                        min="0"
-                        defaultValue="0"
-                        disabled
-                      />
-                      <button className="btn" onClick={() => increment(id)}>
-                        +
-                      </button>
-                      <button className="btn" onClick={() => decrement(id)}>
-                        -
-                      </button>
-                    </div>
-                  );
-                }
-              )}
+              {[
+                { label: "Erwachsene (17+)", count: adultCount, setter: setAdultCount },
+                { label: "Kinder (17-)", count: kidCount, setter: setKidCount },
+                { label: "Haustiere", count: petCount, setter: setPetCount }
+              ].map(({ label, count, setter }, index) => (
+                <div className="form-group" key={index}>
+                  <label>{label}</label>
+                  <input type="number" value={count} readOnly />
+                  <button className="btn" onClick={() => increment(setter, count)}>+</button>
+                  <button className="btn" onClick={() => decrement(setter, count)}>-</button>
+                </div>
+              ))}
             </div>
             <Button onClick={onClickWeiter1}>Weiter ⭢</Button>
           </>
         )}
       </div>
-      {animatePlane && <PlaneImage onAnimationEnd={handleAnimationEnd} />}
+      {animatePlane && <PlaneImage onAnimationEnd={() => setAnimatePlane(false)} />}
     </div>
   );
 }
 
-export default App;
+export default Home;
