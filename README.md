@@ -8,13 +8,13 @@ Dieses Projekt ist ein webbasiertes Tool zur Berechnung von Versicherungsprämie
 - **Schritt 1: Startseite**
   - Ermöglicht es Benutzern, grundlegende Informationen wie die Anzahl der Erwachsenen, Kinder und Haustiere einzugeben.
 
-- **Schritt 2: Über Uns**
+- **Schritt 2: Datenabfrage**
   - Erlaubt es Benutzern, Details wie Reisedatum, Art der Reise und persönliche Reiseerfahrung anzugeben.
 
 - **Schritt 3: Details**
   - Bietet Optionen für zusätzliche Versicherungsleistungen wie Stornoschutz, medizinische Notfallversorgung und Gepäckschutz.
 
-- **Schritt 4: Zusammenfassung**
+- **Schritt 4: Versicherungspaket**
   - Zeigt eine Zusammenfassung der eingegebenen Daten an und ermöglicht es Benutzern, ihre Auswahl zu überprüfen und gegebenenfalls zu ändern.
 
 - **Ergebnisseite**
