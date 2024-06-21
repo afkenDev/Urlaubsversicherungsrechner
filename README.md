@@ -76,3 +76,8 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### Ziele: 
 Ich mache einen Urlaubsversicherungsrechner gemäss meinem Miro Board. 
 Alle Funktionen welche ich erabeite sind im Miro Board zu sehen. 
+
+### Refactoring
+Ich will, das man bei der ersten Seite das Form nur mit den Buttons verändern kann. Ich setzte "disabled" ein. 
+Ich füge Erklärungen in den Code in mit Comments 
+Ich mach, dass man beim Datepicker nur bestimmte Zeitraum auswählen kann, z.B. nicht in die Vergangenheit mit "maxDate und minDate"
