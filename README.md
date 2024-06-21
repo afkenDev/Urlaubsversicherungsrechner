@@ -3,6 +3,8 @@
 
 Dieses Projekt ist ein webbasiertes Tool zur Berechnung von Versicherungsprämien für Reisen. Es ermöglicht Benutzern, verschiedene Parameter einzugeben und eine geschätzte Versicherungsprämie basierend auf ihren Angaben zu erhalten.
 
+Direkter Zugriff: https://urlaubsversicherungsrechner.vercel.app/
+
 ## Funktionen
 
 - **Schritt 1: Startseite**
