@@ -9,6 +9,7 @@ function Schritt2({ globalData, setGlobalData }) {
   const [startDate, setStartDate] = useState(globalData.startDate);
   const [endDate, setEndDate] = useState(globalData.endDate);
   const maxDate = new Date(new Date().getTime() + 90 * 24 * 60 * 60 * 1000); // 3 Monate in Millisekunden
+  const minDate = new Date(new Date().getTime() - 60 * 60 * 1000) //heute
   const navigate = useNavigate();
 
   const handleDateChange = (dates) => {
@@ -18,7 +19,11 @@ function Schritt2({ globalData, setGlobalData }) {
   };
 
   const validateDates = (start, end) => {
-    return start && end && end <= maxDate && (end - start) <= 90 * 24 * 60 * 60 * 1000;
+    if (!start || !end) return false;
+    const isValidStart = start >= minDate && start <= maxDate;
+    const isValidEnd = end >= minDate && end <= maxDate;
+    const isWithinRange = (end - start) <= 90 * 24 * 60 * 60 * 1000;
+    return isValidStart && isValidEnd && isWithinRange;
   };
 
   const onClickWeiter2 = () => {

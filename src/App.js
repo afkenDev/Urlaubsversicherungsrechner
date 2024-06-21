@@ -8,7 +8,7 @@ import Step5 from './components/schritt5';
 import Ergebniss from './components/ergebniss';
 
 const App = () => {
-  const [globalData, setGlobalData] = useState({
+  const [globalData, setGlobalData] = useState({ //Globale Variable über alles
     adults: 0,
     kids: 0,
     pets: 0,

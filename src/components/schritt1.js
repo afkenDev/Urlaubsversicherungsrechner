@@ -76,13 +76,13 @@ function Home({ setGlobalData }) {
             </div>
             <div className="form-container">
               {[
-                { label: "Erwachsene (17+)", count: adultCount, setter: setAdultCount },
+                { label: "Erwachsene (17+)", count: adultCount, setter: setAdultCount},
                 { label: "Kinder (17-)", count: kidCount, setter: setKidCount },
                 { label: "Haustiere", count: petCount, setter: setPetCount }
               ].map(({ label, count, setter }, index) => (
                 <div className="form-group" key={index}>
                   <label>{label}</label>
-                  <input type="number" value={count} readOnly />
+                  <input type="number" value={count} readOnly disabled/>
                   <button className="btn" onClick={() => increment(setter, count)}>+</button>
                   <button className="btn" onClick={() => decrement(setter, count)}>-</button>
                 </div>

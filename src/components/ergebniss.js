@@ -46,7 +46,7 @@ function Ergebniss({ globalData }) {
       - Art der Reise: ${tripType}
       - Reiseerfahrung: ${travelExperience}
       
-      Gesamtprämie: ${premium} €
+      Gesamtprämie: ${premium} Fr.
     `;
 
     return `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -80,7 +80,7 @@ function Ergebniss({ globalData }) {
             <li>Art der Reise: {globalData.tripType}</li>
             <li>Reiseerfahrung: {globalData.travelExperience}</li>
           </ul>
-          <h2>Gesamtprämie: {premium} €</h2>
+          <h2>Gesamtprämie: {premium} Fr.</h2>
         </div>
         <Button onClick={() => navigate('/')}>Zurück zum Anfang</Button>
         <Button onClick={() => window.location.href = createMailtoLink()}>Per E-Mail senden</Button>
