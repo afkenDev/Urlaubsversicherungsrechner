@@ -1,38 +1,41 @@
-# Urlaubsversicherungsrechner
+# Urlaubsversicherungsrechner: Prämien online berechnen
+
 ## Prog 1 von Kenz Abdelkebir
 
-Dieses Projekt ist ein webbasiertes Tool zur Berechnung von Versicherungsprämien für Reisen. Es ermöglicht Benutzern, verschiedene Parameter einzugeben und eine geschätzte Versicherungsprämie basierend auf ihren Angaben zu erhalten.
+Dieses webbasierte Tool ermöglicht die Berechnung von Versicherungsprämien für Reisen. Benutzer können verschiedene Parameter eingeben und erhalten eine geschätzte Prämie basierend auf ihren Angaben.
 
-Direkter Zugriff: https://urlaubsversicherungsrechner.vercel.app/
+**Direkter Zugriff:** [https://urlaubsversicherungsrechner.vercel.app/](https://urlaubsversicherungsrechner.vercel.app/)
 
 ## Funktionen
 
-- **Schritt 1: Startseite**
-  - Ermöglicht es Benutzern, grundlegende Informationen wie die Anzahl der Erwachsenen, Kinder und Haustiere einzugeben.
+1. **Schritt 1: Startseite**
+   - Eingabe der Anzahl von Erwachsenen, Kindern und Haustieren (optional).
+   - Berechnung einer ersten Prämie basierend auf Standardwerten.
 
-- **Schritt 2: Datenabfrage**
-  - Erlaubt es Benutzern, Details wie Reisedatum, Art der Reise und persönliche Reiseerfahrung anzugeben.
+2. **Schritt 2: Datenabfrage**
+   - Angabe von Reisedaten, Reiseart und Reiseerfahrung.
 
-- **Schritt 3: Details**
-  - Bietet Optionen für zusätzliche Versicherungsleistungen wie Stornoschutz, medizinische Notfallversorgung und Gepäckschutz.
+3. **Schritt 3: Details**
+   - Auswahl von optionalen Versicherungsleistungen:
+     - Stornoschutz
+     - Medizinische Notfallversorgung
+     - Gepäckschutz
+   - Erläuterung der Leistungen in Kurzform.
 
-- **Schritt 4: Versicherungspaket**
-  - Zeigt eine Zusammenfassung der eingegebenen Daten an und ermöglicht es Benutzern, ihre Auswahl zu überprüfen und gegebenenfalls zu ändern.
+4. **Schritt 4: Versicherungspaket**
+   - Zusammenfassung der ausgewählten Optionen.
+   - Möglichkeit zur Überprüfung und Anpassung der Angaben.
 
-- **Ergebnisseite**
-  - Präsentiert eine detaillierte Übersicht der ausgewählten Versicherungsleistungen und berechnet die Gesamtprämie basierend auf den Benutzereingaben.
+5. **Ergebnisseite**
+   - Detaillierte Übersicht der gewählten Leistungen.
+   - Berechnung der Gesamtprämie basierend auf den Eingaben.
+   - Hinweis: Die Prämie ist eine Schätzung, der tatsächliche Preis kann abweichen.
 
 ## Technologien
 
-- **Frontend:**
-  - React.js
-  - React Router für die Navigation
-  - CSS für das Styling der Benutzeroberfläche
+* **Frontend:** React.js, React Router (Navigation), CSS (Styling)
+* **Backend:** Keine serverseitige Logik, rein clientseitiges Tool
 
-- **Backend:**
-  - Keine serverseitige Logik, das Tool ist rein clientseitig
-
-## Installation
 
 1. **Clone das Repository:**
    ```bash
