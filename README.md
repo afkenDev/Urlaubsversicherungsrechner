@@ -30,6 +30,17 @@ Dieses webbasierte Tool ermöglicht die Berechnung von Versicherungsprämien fü
    - Detaillierte Übersicht der gewählten Leistungen.
    - Berechnung der Gesamtprämie basierend auf den Eingaben.
    - Hinweis: Die Prämie ist eine Schätzung, der tatsächliche Preis kann abweichen.
+     
+## Persönliches 
+### Ziele: 
+Ich mache einen Urlaubsversicherungsrechner gemäss meinem Miro Board. 
+Alle Funktionen welche ich erabeite sind im Miro Board zu sehen. 
+### Vorgehen: 
+Ich habe jede Seite nach der anderen gemacht. Ich habe zuerst die Texte ins HTML gemacht, dann das Form 
+und folglich das ganze JS dazu. 
+Für die erste Seite habe ich am längsten gebraucht, da ich dort das CSS gemacht habe und die ersten wichtigen Komponeten. 
+Auf der ersten Seite habe ich das ziel gehabt eine schöne Animation zu machen, dabei ist die Wolke entsanden. 
+Am Schluss habe ich für die Berrechnung alles in eine globale Variable mit react-dom gemacht. 
 
 ## Technologien
 
@@ -75,10 +86,7 @@ Your app is ready to be deployed!
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 
-## Persönliches 
-### Ziele: 
-Ich mache einen Urlaubsversicherungsrechner gemäss meinem Miro Board. 
-Alle Funktionen welche ich erabeite sind im Miro Board zu sehen. 
+
 
 ### Refactoring
 Ich will, das man bei der ersten Seite das Form nur mit den Buttons verändern kann. Ich setzte "disabled" ein. 
