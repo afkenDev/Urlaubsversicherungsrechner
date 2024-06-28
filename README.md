@@ -9,24 +9,29 @@ Dieses webbasierte Tool ermöglicht die Berechnung von Versicherungsprämien fü
 ## Funktionen
 
 1. **Schritt 1: Startseite**
+   - Startknopf mit Wolkenanimation
    - Eingabe der Anzahl von Erwachsenen, Kindern und Haustieren (optional).
    - Berechnung einer ersten Prämie basierend auf Standardwerten.
 
-2. **Schritt 2: Datenabfrage**
-   - Angabe von Reisedaten, Reiseart und Reiseerfahrung.
+3. **Schritt 2: Reisedaten**
+   - Angabe von Reisedaten.
 
-3. **Schritt 3: Details**
+4. **Schritt 3: Schutz**
    - Auswahl von optionalen Versicherungsleistungen:
      - Stornoschutz
      - Medizinische Notfallversorgung
      - Gepäckschutz
    - Erläuterung der Leistungen in Kurzform.
 
-4. **Schritt 4: Versicherungspaket**
+5. **Schritt 4: Reiseart**
+   - Auswahl von der Reiseart ohne Einfluss auf den Preis
+
+7. **Schritt 5: Reiseerfahrung**
+   - Auswahl von der Reiseerfahrung mit Einfluss auf den Preis 
+
+9. **Schritt 6: Ergebnisseite**
    - Zusammenfassung der ausgewählten Optionen.
    - Möglichkeit zur Überprüfung und Anpassung der Angaben.
-
-5. **Ergebnisseite**
    - Detaillierte Übersicht der gewählten Leistungen.
    - Berechnung der Gesamtprämie basierend auf den Eingaben.
    - Hinweis: Die Prämie ist eine Schätzung, der tatsächliche Preis kann abweichen.
